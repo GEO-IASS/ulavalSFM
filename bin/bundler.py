@@ -463,6 +463,9 @@ def extract_focal_length(images=[], scale=1.0, verbose=False, flmul=1.0):
         # Extract Resolution
         img_width = tags.get('ExifImageWidth', 0)
         img_height = tags.get('ExifImageHeight', 0)
+        # Fallback to PIL if not found in EXIF
+        if 0 in (img_width, img_height):
+            img_width, img_height = img.size
         if img_width < img_height:
             img_width,img_height = img_height,img_width
 
